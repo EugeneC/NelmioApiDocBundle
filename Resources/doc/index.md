@@ -164,7 +164,7 @@ class YourController
 * `parameters`: an array of parameters;
 
 * `input`: the input type associated to the method (currently this supports Form Types, classes with JMS Serializer
- metadata, and classes with Validation component metadata) useful for POST|PUT methods, either as FQCN or as form type
+ metadata, classes with Validation component metadata and classes that implement JsonSerializable) useful for POST|PUT methods, either as FQCN or as form type
  (if it is registered in the form factory in the container).
 
 * `output`: the output type associated with the response.  Specified and parsed the same way as `input`.
@@ -380,7 +380,7 @@ You can also add some options to pass to the form. You just have to use the `opt
 ```php
 input = {
  "class" = "your_form_type",
- "options" = {"method" => "PUT"},
+ "options" = {"method" = "PUT"},
 }
 ```
 
