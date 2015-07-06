@@ -16,9 +16,9 @@
 
         <parameter key="nelmio_api_doc.parser.collection_parser.class">Nelmio\ApiDocBundle\Parser\CollectionParser</parameter>
         <parameter key="nelmio_api_doc.parser.form_errors_parser.class">Nelmio\ApiDocBundle\Parser\FormErrorsParser</parameter>
-
         <parameter key="nelmio_api_doc.factory.api_doc.class">Nelmio\ApiDocBundle\Factory\ApiDocFactory</parameter>
         <parameter key="nelmio_api_doc.manager.documentation_files.class">Nelmio\ApiDocBundle\Manager\DocumentationFilesManager</parameter>
+        <parameter key="nelmio_api_doc.parser.json_serializable_parser.class">Nelmio\ApiDocBundle\Parser\JsonSerializableParser</parameter>
     </parameters>
 
     <services>
@@ -76,6 +76,11 @@
         </service>
         <service id="nelmio_api_doc.parser.form_errors_parser" class="%nelmio_api_doc.parser.form_errors_parser.class%">
             <tag name="nelmio_api_doc.extractor.parser" />
+        </service>
+
+        <!-- priority=1 means it comes before the validation parser, which can often add better type information -->
+        <service id="nelmio_api_doc.parser.json_serializable_parser" class="%nelmio_api_doc.parser.json_serializable_parser.class%">
+            <tag name="nelmio_api_doc.extractor.parser" priority="1" />
         </service>
     </services>
 
