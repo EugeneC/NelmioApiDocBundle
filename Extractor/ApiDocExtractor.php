@@ -170,6 +170,12 @@ class ApiDocExtractor
         $files                 = $this->container->getParameter('nelmio_api_doc.documentation_files');
         $documentationFiles    = $this->container->get('nelmio_api_doc.manager.documentation_files')->parse($files);
 
+        foreach ($documentationFiles as $index => $file) {
+            $annotation = $file['annotation'];
+            $route = $annotation->getRoute();
+            $documentationFiles[$index]['annotation'] = $this->extractData($annotation, $route, $this->getReflectionMethod($route->getDefault('_controller')));
+        }
+
         if ($documentationFiles  !== false) {
             $array = array_merge($array, $documentationFiles);
         };
