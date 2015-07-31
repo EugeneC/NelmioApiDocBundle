@@ -107,6 +107,7 @@ class SwaggerFormatter implements FormatterInterface
         );
 
         $apis = &$resourceList['apis'];
+        $resources = [];
 
         foreach ($collection as $item) {
 
@@ -114,6 +115,11 @@ class SwaggerFormatter implements FormatterInterface
             $apiDoc = $item['annotation'];
             $resource = $item['resource'];
 
+            if (in_array($resource, $resources)) {
+                continue;
+            } else {
+                $resources[] = $resource;
+            }
             if (!$apiDoc->isResource()) {
                 continue;
             }
